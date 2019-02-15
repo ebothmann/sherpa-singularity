@@ -31,7 +31,7 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     echo Installing yum dependencies ...
     yum -y groupinstall "Development Tools"
     yum -y install \
-        gsl-devel
+        gsl-devel \
         make \
         python-devel \
         wget \
@@ -41,7 +41,7 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     mkdir -p /scratch/rivet
     cd /scratch/rivet
     mv /rivet-bootstrap .
-    mv /HepMC2-2.06.09.tar.gz .
+    mv /HepMC-2.06.09.tar.gz .
     chmod +x rivet-bootstrap
     INSTALL_PREFIX=/usr/local MAKE="make -j8" RIVET_CONFFLAGS="CXXFLAGS=-std=c++11" \
         ./rivet-bootstrap
@@ -69,4 +69,7 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     cd ..
 
     cd /
-    #rm -rf /scratch
+    rm -rf /scratch
+
+    ldconfig
+    yum clean all
