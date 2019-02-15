@@ -75,7 +75,7 @@ mkdir -p $INSTALL_PREFIX/etc/bash_completion.d
 ## Install HepMC
 if [[ "$INSTALL_HEPMC" -eq "1" ]]; then
     cd $BUILD_PREFIX
-    tar xzf HepMC-$HEPMC_VERSION.tar.gz
+    test -d HepMC-$HEPMC_VERSION || wget_untar https://www.theorie.physik.uni-goettingen.de/~bothmann/HepMC-$HEPMC_VERSION.tar.gz
     cd HepMC-$HEPMC_VERSION
     autoreconf -fi
     conf --with-momentum=GEV --with-length=MM

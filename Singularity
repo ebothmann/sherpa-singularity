@@ -23,7 +23,6 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
 
 
 %files
-    HepMC-2.06.09.tar.gz
     rivet-bootstrap
 
 
@@ -41,9 +40,6 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     mkdir -p /scratch/rivet
     cd /scratch/rivet
     mv /rivet-bootstrap .
-    mv /HepMC-2.06.09.tar.gz .
-    ls -lh
-    tar -t HepMC-2.06.09.tar.gz
     chmod +x rivet-bootstrap
     INSTALL_PREFIX=/usr/local MAKE="make -j8" RIVET_CONFFLAGS="CXXFLAGS=-std=c++11" \
         ./rivet-bootstrap
