@@ -63,7 +63,7 @@ set -e
 test -n "$DEBUG" && set -x
 export PATH=$INSTALL_PREFIX/bin:$PATH
 
-function wget_untar { wget --no-check-certificate $1 -O- | tar xz; }
+function wget_untar { echo "wget_untar: $1"; wget --no-check-certificate $1 -O- | tar xz; }
 function conf { ./configure --prefix=$INSTALL_PREFIX "$@"; }
 function mmi { $MAKE "$@" && $MAKE install; }
 
