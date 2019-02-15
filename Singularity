@@ -14,8 +14,17 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     Version v0.1
 
 
+%environment
+    . /usr/local/rivetenv.sh
+
+
 %runscript
     Sherpa "$@"
+
+
+%files
+    HepMC-2.06.09.tar.gz
+    rivet-bootstrap
 
 
 %post
@@ -31,12 +40,33 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     echo Bootstrapping Rivet, FastJet, YODA and HepMC
     mkdir -p /scratch/rivet
     cd /scratch/rivet
-    wget \
-        https://phab.hepforge.org/source/rivetbootstraphg/browse/2.6.2/rivet-bootstrap?view=raw \
-        -O rivet-bootstrap
+    mv /rivet-bootstrap .
+    mv /HepMC2-2.06.09.tar.gz .
     chmod +x rivet-bootstrap
     INSTALL_PREFIX=/usr/local MAKE="make -j8" RIVET_CONFFLAGS="CXXFLAGS=-std=c++11" \
         ./rivet-bootstrap
-    . /usr/local/rivetenv.sh
+    cd ..
 
-    wget 
+    echo Installing LHAPDF
+    wget https://lhapdf.hepforge.org/downloads/?f=LHAPDF-6.2.1.tar.gz -O- | tar xz
+    cd LHAPDF-6.2.1
+    ./configure --prefix=/usr/local
+    make -j && make install
+    cd ..
+
+    echo Installing Sherpa
+    wget https://sherpa.hepforge.org/downloads/?f=SHERPA-MC-2.2.6.tar.gz -O- | tar xz
+    cd SHERPA-MC-2.2.6
+    ./configure \
+        --prefix=/usr/local \
+        --enable-fastjet=/usr/local \
+        --enable-hepmc2=/usr/local \
+        --enable-lhapdf=/usr/local \
+        --enable-rivet=/usr/local \
+        --with-sqlite3=install \
+        CXXFLAGS="-O3 --std=c++11"
+    make -j && make install
+    cd ..
+
+    cd /
+    #rm -rf /scratch
