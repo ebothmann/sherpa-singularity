@@ -1,0 +1,27 @@
+Bootstrap: shub
+From: ebothmann/sherpa-singularity
+
+
+%help
+A Singularity file to define an image for running Sherpa 2.2.6 including
+support for FastJet, HepMC2, LHAPDF and Rivet. For the latter, also the
+rivet-mkhtml tool is supported by including a texlive installation.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%post
+    echo Installing yum dependencies ...
+
+    yum -y install \
+        ghostscript \
+        ImageMagick \
+        texlive \
+	texlive-latex \
+        which
+
+    ldconfig
+    yum clean all
