@@ -61,6 +61,7 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
         --enable-hepmc2=/usr/local \
         --enable-lhapdf=/usr/local \
         --enable-rivet=/usr/local \
+        --enable-analysis \
         --with-sqlite3=install \
         CXXFLAGS="-O3 --std=c++11"
     make -j && make install
