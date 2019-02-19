@@ -1,0 +1,11 @@
+--- Tools/Node.C        2019-02-18 22:22:10.508826304 +0100
++++ Tools/Node.C.patched        2019-02-18 22:21:57.888826767 +0100
+@@ -1,6 +1,8 @@
+ #ifndef Node_C
+ #define Node_C
+
++#include <cstddef>
++
+ namespace ATOOLS {
+
+   template <class Node_Type>

@@ -1,0 +1,48 @@
+Bootstrap: shub
+From: ebothmann/sherpa-singularity
+
+
+%help
+A Singularity file to define an image for running Sherpa 2.2.6 including
+support for FastJet, HepMC2, LHAPDF and Rivet. For the latter, also the
+rivet-mkhtml tool is supported by including a texlive installation.  In
+addition, the Compare plotting tool and its dependency ROOT v5.34.36 are
+installed in order to plot results from the internal analysis module of Sherpa.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%post
+    echo Installing yum dependencies ...
+
+    # install rivet-mkhtml dependencies
+    yum -y install \
+        ghostscript \
+        ImageMagick \
+        texlive \
+        texlive-latex \
+        which
+
+    mkdir /scratch
+    cd /scratch
+
+    echo Installing ROOT
+    wget https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz -O- | tar xz
+    mv root /opt
+
+    echo Installing Compare
+    wget http://www.freacafe.de/dnl/compare/Compare-1.9.tar.gz -O- | tar xz
+    cd Compare-1.9
+    patch -p0 < Compare-1.9_patch
+    ./configure --prefix=/usr/local --with-rootsys=/opt/root
+    make -j && make install
+    cd ..
+
+    cd /
+    rm -rf /scratch
+
+    ldconfig
+    yum clean all
