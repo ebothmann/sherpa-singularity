@@ -15,6 +15,10 @@ installed in order to plot results from the internal analysis module of Sherpa.
     Version v0.1
 
 
+%environment
+    . /opt/root/bin/thisroot.sh
+
+
 %files
     Compare-1.9_patch
 
