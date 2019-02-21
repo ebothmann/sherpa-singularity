@@ -35,19 +35,19 @@ installed in order to plot results from the internal analysis module of Sherpa.
         which
 
     mkdir /scratch
-    cd /scratch
 
     echo Installing ROOT
+    cd /scratch
     wget https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz -O- | tar xz
     mv root /opt
 
     echo Installing Compare
+    cd /scratch
     wget http://www.freacafe.de/dnl/compare/Compare-1.9.tar.gz -O- | tar xz
     cd Compare-1.9
     patch -p0 < /Compare-1.9_patch
     ./configure --prefix=/usr/local --with-rootsys=/opt/root
     make -j && make install
-    cd ..
 
     cd /
     rm -rf /scratch
