@@ -1,0 +1,58 @@
+# The following header has been based on instructions in
+# https://singularity.lbl.gov/build-docker-module
+Bootstrap: docker
+From: centos:7
+
+
+%help
+A Singularity file to build the BlackHat library and put the compiled files
+into a tar file. This tar file can be downloaded when building other
+centos-7-based Singularity images. This is a workaround because Singularity Hub
+has a 2-hour build time limit which means we can not compile the library there.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%environment
+    export BLACKHAT_PREFIX=/opt/blackhat-r3095
+
+
+%runscript
+    echo Compressing BlackHat and its dependencies
+    tar -czf blackhat-r3095.tar.gz /opt/blackhat-r3095
+
+
+%post
+    echo Installing yum dependencies ...
+    yum -y groupinstall "Development Tools"
+    #yum -y install \
+    #    make \
+    #    python-devel \
+    #    wget
+
+    mkdir -p /scratch
+    prefix=/opt/blackhat-r3095
+
+    echo Installing QD library
+    cd /scratch
+    wget http://crd.lbl.gov/~dhbailey/mpdist/qd-2.3.22.tar.gz -O- | tar xz
+    cd qd-2.3.22
+    ./configure --prefix="$prefix" --enable-shared
+    make -j && make install
+
+    echo Installing BlackHat
+    cd /scratch
+    wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095.tar.gz -O- | tar xz
+    cd blackhat-r3095
+    ./configure --with-QDpath="$prefix" --prefix="$prefix" --enable-public=no --enable-readline=no
+    # NOTE: BlackHat has issues when using parallel build jobs
+    make -j1 && make install
+
+    cd /
+    rm -rf /scratch
+
+    ldconfig
+    yum clean all
