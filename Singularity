@@ -32,8 +32,10 @@ support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops and BlackHat.
     yum -y install \
         gsl-devel \
         make \
+        openssl-devel \
         python-devel \
         wget \
+        which \
         zlib-devel \
 
     echo Bootstrapping Rivet, FastJet, YODA and HepMC
