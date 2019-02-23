@@ -6,7 +6,7 @@ From: centos:7
 
 %help
 A Singularity file to define an image for running Sherpa 2.2.6 including
-support for FastJet, HepMC2, LHAPDF and Rivet.
+support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops and BlackHat.
 
 
 %labels
@@ -59,6 +59,10 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     ./scons
     ./openloops libinstall ppll ppllj pplljj
 
+    echo Installing BlackHat
+    cd /
+    wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095.tar.gz -O- | tar xz
+
     echo Installing Sherpa
     cd /scratch
     wget https://sherpa.hepforge.org/downloads/?f=SHERPA-MC-2.2.6.tar.gz -O- | tar xz
@@ -66,6 +70,7 @@ support for FastJet, HepMC2, LHAPDF and Rivet.
     ./configure \
         --prefix=/usr/local \
         --enable-analysis \
+        --enable-blackhat=/opt/blackhat-r3095 \
         --enable-fastjet=/usr/local \
         --enable-hepmc2=/usr/local \
         --enable-lhapdf=/usr/local \
