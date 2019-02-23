@@ -1,0 +1,30 @@
+# The following header has been based on instructions in
+# https://singularity.lbl.gov/build-docker-module
+Bootstrap: docker
+From: centos:7
+
+
+%help
+A Singularity file to test OpenMPI interplay on a cluster.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%runscript
+    /usr/bin/ring "$@"
+
+
+%post
+    echo Installing yum dependencies ...
+    yum -y groupinstall "Development Tools"
+    yum -y install wget
+    wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.0.tar.bz2
+    tar jtf openmpi-2.1.0.tar.bz2
+    cd openmpi-2.1.0
+    ./configure --prefix=/usr/local
+    make
+    make install
+    mpicc examples/ring_c.c -o /usr/bin/ring
