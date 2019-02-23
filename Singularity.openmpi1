@@ -13,6 +13,7 @@ Include: yum
 %post
     echo "Installing Development Tools YUM group"
     yum -y groupinstall "Development Tools"
+    yum -y install wget
     echo "Installing OpenMPI into container..."
     mkdir -p /tmp/ompi
     cd /tmp/ompi
