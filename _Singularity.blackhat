@@ -28,10 +28,7 @@ has a 2-hour build time limit which means we can not compile the library there.
 %post
     echo Installing yum dependencies ...
     yum -y groupinstall "Development Tools"
-    #yum -y install \
-    #    make \
-    #    python-devel \
-    #    wget
+    yum -y install openssl-devel wget
 
     mkdir -p /scratch
     prefix=/opt/blackhat-r3095
