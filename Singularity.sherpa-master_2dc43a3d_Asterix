@@ -19,6 +19,9 @@ BlackHat.
 
 
 %post
+    echo Installing yum dependencies ...
+    yum install -y libzip-devel
+
     echo Installing Sherpa
     mkdir /scratch
     cd /scratch
@@ -41,3 +44,4 @@ BlackHat.
     cd /
     rm -rf /scratch
     ldconfig
+    yum clean all
