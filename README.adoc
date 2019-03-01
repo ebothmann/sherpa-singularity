@@ -3,3 +3,37 @@ Enrico Bothmann
 
 [link=https://singularity-hub.org/collections/2368]
 image::https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg[Singularity Hub Batch]
+
+== Singularity image recipes in this repository
+
+Singularity.sherpa-*:: Recipes for images that run the respective Sherpa
+version. We use Asterix-themed name tags for recipes that serve a specific
+Sherpa git commit. This has no meaning in any other context and just serves as
+a mnemonic here, when a user has pulled several such images.
+Running a Sherpa image calls `Sherpa`.
+
+Singularity.plotting:: A recipe for an image that includes `Compare-1.9` and
+support for `rivet-mkhtml`. This can be used for plotting Sherpa/Rivet analysis
+output. Running it calls `rivet-mkhtml`.
+
+Singularity.mceg:: A recipe for an image that serves as the base image for all
+`Singularity.sherpa-*` recipes. This allows for a quick build of new Sherpa
+images, because the dependencies do not need to be re-compiled.
+
+Singularity.rivet:: A recipe for an image that serves as the base image for all
+other recipes in this repository (since they all need Rivet as a dependency).
+Running it calls `rivet`.
+
+== Helper files used by the above recipes
+
+Blackhat:: A helper recipe file that can not be build on Singularity Hub due to
+its 2 hours runtime limitation.  It must be built on another machine. Running
+it exports a gzipped tar-file which can be downloaded and extracted from within
+other recipes to install the BlackHat binaries. This is used in the
+`Singularity.mceg` recipe.
+
+Compare-1.9_patch:: A helper file used by the `Singularity.plotting` recipe to
+fix the compilation of `Compare-1.9`.
+
+rivet-bootstrap:: A helper file used by the `Singularity.rivet` recipe to allow
+for custom download links for Rivet and its dependencies.
