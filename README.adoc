@@ -1,0 +1,5 @@
+= sherpa-singularity
+Enrico Bothmann
+
+[link=https://singularity-hub.org/collections/2368]
+image::https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg[Singularity Hub Batch]
