@@ -37,7 +37,7 @@ BlackHat.
         --enable-hepmc2=/usr/local \
         --enable-lhapdf=/usr/local \
         --enable-openloops=/opt/OpenLoops-1.3.1 \
-        --enable-rivet=/usr/local
+        --enable-rivet=/usr/local \
         CXXFLAGS="-O3"
     make -j && make install
 
