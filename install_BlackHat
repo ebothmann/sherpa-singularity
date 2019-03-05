@@ -27,6 +27,8 @@ function cleanup {
 # register the cleanup function to be called on the EXIT signal
 trap cleanup EXIT
 
+cd "$WORK_DIR"
+
 echo Installing QD library
 wget http://crd.lbl.gov/~dhbailey/mpdist/qd-2.3.22.tar.gz -O- | tar xz
 cd qd-2.3.22
@@ -35,7 +37,7 @@ make -j && make install
 cd -
 
 echo Installing BlackHat
-wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095.tar.gz -O- | tar xz
+wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095_source.tar.gz -O- | tar xz
 cd blackhat-r3095
 ./configure --with-QDpath="$BLACKHAT_PREFIX" --prefix="$BLACKHAT_PREFIX" --enable-public=no --enable-readline=no
 # NOTE: BlackHat has issues when using parallel build jobs
