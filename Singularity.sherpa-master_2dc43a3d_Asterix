@@ -40,7 +40,7 @@ BlackHat.
         --enable-rivet=/usr/local \
         --with-libzip=install \
         CXXFLAGS="-O3"
-    make -j
+    make -j4
     make install
 
     cd /
