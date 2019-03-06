@@ -13,6 +13,10 @@ to be used but only serves as a base image for all the Sherpa images.
     Version v0.1
 
 
+%files
+    install_OpenLoops
+
+
 %post
     echo Installing LHAPDF
     mkdir -p /scratch
@@ -25,9 +29,12 @@ to be used but only serves as a base image for all the Sherpa images.
     echo Installing OpenLoops
     mkdir -p /opt
     cd /opt
-    wget https://openloops.hepforge.org/downloads?f=OpenLoops-1.3.1.tar.gz -O- | tar xz
-    cd OpenLoops-1.3.1/
-    ./scons
+    chmod +x /install_OpenLoops
+    OL_PREFIX=$(/install_OpenLoops)
+    rm /install_OpenLoops
+
+    echo Installing OpenLoops Drell-Yan process libraries
+    cd "$OL_PREFIX"
     ./openloops libinstall ppll ppllj pplljj
 
     echo Installing prebuilt BlackHat binaries
