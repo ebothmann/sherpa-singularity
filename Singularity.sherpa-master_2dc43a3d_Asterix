@@ -20,7 +20,7 @@ BlackHat.
 
 %post
     echo Installing yum dependencies ...
-    yum install -y texi2html texinfo
+    yum install -y texinfo
 
     echo Installing Sherpa
     mkdir /scratch
@@ -46,4 +46,5 @@ BlackHat.
     cd /
     rm -rf /scratch
     ldconfig
+    yum erase -y texinfo perl-Text-Unidecode perl-libintl
     yum clean all
