@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# NOTE: OpenLoops 1.3.1 need gfortran 4.6 or newer
+
 echo Installing OpenLoops
 wget https://openloops.hepforge.org/downloads?f=OpenLoops-1.3.1.tar.gz -O- | tar xz
 cd OpenLoops-1.3.1/
