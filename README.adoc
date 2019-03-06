@@ -37,3 +37,7 @@ fix the compilation of `Compare-1.9`.
 
 rivet-bootstrap:: A helper file used by the `Singularity.rivet` recipe to allow
 for custom download links for Rivet and its dependencies.
+
+install_*:: Helper files used to install stuff. These can also be used as
+stand-alone scripts to install this stuff in non-Singularity contexts. However,
+mileage might vary, since there might be missing dependencies.
