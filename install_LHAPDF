@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo Installing LHAPDF
+wget https://lhapdf.hepforge.org/downloads/?f=LHAPDF-6.2.1.tar.gz -O- | tar xz
+cd LHAPDF-6.2.1
+./configure --prefix=/usr/local
+make -j && make install
