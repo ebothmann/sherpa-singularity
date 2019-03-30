@@ -21,6 +21,7 @@ to be used but only serves as a base image for all the Sherpa images.
 %post
     mkdir -p /scratch
     cd /scratch
+    chmod +x /install_LHAPDF
     /install_LHAPDF
     rm /install_LHAPDF
 
