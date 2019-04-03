@@ -1,0 +1,19 @@
+# set up OpenMPI environment
+MPI_BIN=/usr/lib64/openmpi-1.10/bin
+MPI_SYSCONFIG=/etc/openmpi-1.10-x86_64
+MPI_FORTRAN_MOD_DIR=/usr/lib64/gfortran/modules/openmpi-1.10-x86_64 
+MPI_INCLUDE=/usr/include/openmpi-1.10-x86_64 
+MPI_LIB=/usr/lib64/openmpi-1.10/lib 
+MPI_MAN=/usr/share/man/openmpi-1.10-x86_64 
+MPI_PYTHON_SITEARCH=/usr/lib64/python2.6/site-packages/openmpi-1.10 
+MPI_COMPILER=openmpi-x86_64 
+MPI_SUFFIX=_openmpi 
+MPI_HOME=/usr/lib64/openmpi-1.10
+export MPI_BIN MPI_SYSCONFIG MPI_FORTRAN_MOD_DIR MPI_INCLUDE MPI_LIB MPI_MAN MPI_PYTHON_SITEARCH
+export MPI_COMPILER MPI_SUFFIX MPI_HOME
+export PATH="$MPI_BIN:$PATH"
+export LD_LIBRARY_PATH="$MPI_LIB:$LD_LIBRARY_PATH"
+export PYTHONPATH="$MPI_PYTHON_SITEARCH:$PYTHONPATH"
+export MANPATH="$MPI_MAN:$MANPATH"
+export CXXFLAGS="-I${MPI_INCLUDE}"
+export CFLAGS="-I${MPI_INCLUDE}"
