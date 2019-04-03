@@ -39,8 +39,9 @@ Rivet.
         wget \
         which \
         zlib-devel
-    yum -y install devtoolset-6  # needs to be done separately from installing centos-release-scl
+    yum -y install devtoolset-6 python27  # needs to be done separately from installing centos-release-scl
     source /opt/rh/devtoolset-6/enable
+    source /opt/rh/python27/enable
 
     echo Bootstrapping Rivet, FastJet, YODA and HepMC
     mkdir -p /scratch/rivet
