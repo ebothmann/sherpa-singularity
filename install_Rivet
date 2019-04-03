@@ -1,0 +1,5 @@
+chmod +x rivet-bootstrap
+INSTALL_PREFIX=/usr/local \
+	       MAKE="make -j8" \
+	       RIVET_CONFFLAGS="CXXFLAGS=-std=c++11" \
+	       ./rivet-bootstrap
