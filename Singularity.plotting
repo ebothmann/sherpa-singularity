@@ -40,7 +40,8 @@ of Sherpa.
     echo Installing ROOT
     mkdir /scratch
     cd /scratch
-    wget https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz -O- | tar xz
+    #wget https://root.cern.ch/download/root_v5.34.36.Linux-centos7-x86_64-gcc4.8.tar.gz -O- | tar xz  # for CentOS 7
+    wget https://root.cern.ch/download/root_v5.34.36.Linux-slc6-x86_64-gcc4.4.tar.gz -O- | tar xz
     mv root /opt
 
     echo Installing Compare
