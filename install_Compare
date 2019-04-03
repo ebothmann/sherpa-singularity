@@ -1,0 +1,6 @@
+wget http://www.freacafe.de/dnl/compare/Compare-1.9.tar.gz -O- | tar xz
+cd Compare-1.9
+patch -p0 < /Compare-1.9_patch
+cp /Compare-logo.gif Run/logo.gif
+./configure --prefix=/usr/local --with-rootsys=/opt/root
+make -j && make install
