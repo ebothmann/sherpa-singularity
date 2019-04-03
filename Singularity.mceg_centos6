@@ -14,13 +14,36 @@ to be used but only serves as a base image for all the Sherpa images.
 
 
 %files
+    hostlibs.txt
     install_OpenLoops
     install_LHAPDF
+    enable_OpenMPI
+
+
+%environment
+    source /enable_OpenMPI
 
 
 %post
+    echo Installing yum dependencies ...
+    yum -y install openmpi-1.10-devel
+
+    # set up build environment
     source /opt/rh/devtoolset-6/enable
     source /opt/rh/python27/enable
+    source /enable_OpenMPI
+
+    # needed for running on cluster
+    mkdir -p /opt/torque
+    mkdir -p /etc/libibverbs.d
+    mkdir -p /tmp_local
+
+    # needed for host lib linking
+    mkdir -p /hostlibs/lib64
+    mkdir -p /hostlibs/usr/lib64
+    while read p; do
+        [[ -f "$p" ]] || ln -fs /hostlibs"$p" "$p"
+    done </hostlibs.txt
 
     mkdir -p /scratch
     cd /scratch
@@ -39,10 +62,11 @@ to be used but only serves as a base image for all the Sherpa images.
     cd "OpenLoops-$openloops_version"
     ./openloops libinstall ppll ppllj pplljj ppvv ppvv_ew ppvvj ppvvj_ew
 
-    #echo Installing prebuilt BlackHat binaries
-    #cd /
-    #wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095_centos6_binary.tar.gz -O- | tar xz
+    echo Installing prebuilt BlackHat binaries
+    cd /
+    wget https://www.theorie.physik.uni-goettingen.de/~bothmann/blackhat-r3095_centos6_binary.tar.gz -O- | tar xz
 
     cd /
     rm -rf /scratch
     ldconfig
+    yum clean all
