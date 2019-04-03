@@ -1,7 +1,7 @@
 # The following header has been based on instructions in
 # https://singularity.lbl.gov/build-docker-module
 Bootstrap: docker
-From: centos:7
+From: centos:6
 
 %help
 A Singularity file to define an image that includes FastJet, HepMC2,
@@ -16,6 +16,7 @@ Rivet.
 
 
 %environment
+    source /opt/rh/devtoolset-6/enable
     . /usr/local/rivetenv.sh
 
 
@@ -29,15 +30,17 @@ Rivet.
 
 %post
     echo Installing yum dependencies ...
-    yum -y groupinstall "Development Tools"
     yum -y install \
+        centos-release-scl \
+        git \
         gsl-devel \
-        make \
         openssl-devel \
         python-devel \
         wget \
         which \
         zlib-devel
+    yum -y install devtoolset-6  # needs to be done separately from installing centos-release-scl
+    source /opt/rh/devtoolset-6/enable
 
     echo Bootstrapping Rivet, FastJet, YODA and HepMC
     mkdir -p /scratch/rivet
