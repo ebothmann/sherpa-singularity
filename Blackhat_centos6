@@ -1,0 +1,51 @@
+# The following header has been based on instructions in
+# https://singularity.lbl.gov/build-docker-module
+Bootstrap: docker
+From: centos:6
+
+
+%help
+A Singularity file to build the BlackHat library and put the compiled files
+into a tar file. This tar file can be downloaded when building other
+centos-6-based Singularity images. This is a workaround because Singularity Hub
+has a 2-hour build time limit which means we can not compile the library there.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%environment
+    export BLACKHAT_PREFIX=/opt/blackhat-r3095
+    source /opt/rh/devtoolset-6/enable  # needed downstream for OpenLoops
+    source /opt/rh/python27/enable  # at least needed for YODA
+
+
+%files
+    install_BlackHat
+
+
+%runscript
+    echo Compressing BlackHat and its dependencies
+    tar -czf blackhat-r3095_centos6.tar.gz /opt/blackhat-r3095
+
+
+%post
+    echo Installing yum dependencies ...
+    yum -y install \
+        centos-release-scl \
+        openssl-devel \
+        wget \
+    # SCL installs need to be done separately from installing
+    # centos-release-scl to work properly
+    yum -y install devtoolset-6 python27  
+    source /opt/rh/devtoolset-6/enable  # needed downstream for OpenLoops
+    source /opt/rh/python27/enable  # at least needed for YODA
+
+    chmod +x install_BlackHat
+    export BLACKHAT_PREFIX=/opt/blackhat-r3095
+    ./install_BlackHat
+
+    ldconfig
+    yum clean all
