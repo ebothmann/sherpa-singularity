@@ -23,7 +23,7 @@ BlackHat.
 
 %post
     echo Installing yum dependencies ...
-    yum install -y texinfo
+    yum install -y texinfo libtool
 
     # set up build environment
     source /opt/rh/devtoolset-6/enable
