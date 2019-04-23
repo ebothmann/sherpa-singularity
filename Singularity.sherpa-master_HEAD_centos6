@@ -29,6 +29,7 @@ BlackHat.
     source /opt/rh/devtoolset-6/enable
     source /opt/rh/python27/enable
     source /enable_OpenMPI
+    export PATH="/usr/local/bin:$PATH"  # such that the custom autoconf is found first
 
     echo Installing Sherpa
     mkdir /scratch
