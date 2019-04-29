@@ -34,7 +34,7 @@ BlackHat.
     echo Installing Sherpa
     mkdir /scratch
     cd /scratch
-    git clone https://gitlab.com/sherpa-team/sherpa.git
+    git clone --branch tmp-fix-kperp-x-y-rotation https://gitlab.com/sherpa-team/sherpa.git
     cd sherpa
     autoreconf -i
     ./configure \
