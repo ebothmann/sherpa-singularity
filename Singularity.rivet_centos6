@@ -28,6 +28,8 @@ Rivet.
 %files
     rivet-bootstrap
     install_Rivet
+    HepMCReader.cc
+    install_HepMCReader
 
 
 %post
@@ -53,6 +55,15 @@ Rivet.
     mv /rivet-bootstrap .
     chmod +x /install_Rivet
     /install_Rivet
+
+    echo Installing HepMCReader
+    mkdir -p /scratch/hepmcreader
+    cd /scratch/hepmcreader
+    mv /HepMCReader.cc .
+    mv /install_HepMCReader .
+    chmod +x /install_HepMCReader
+    /install_HepMCReader
+
     cd /
     rm -rf /scratch
 
