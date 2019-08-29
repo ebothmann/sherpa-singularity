@@ -1,5 +1,5 @@
 rivet_prefix=/usr/local
 hepmc_prefix=/usr/local
-CXXFLAGS=-std=c++11 -I $(rivet_prefix)/include -I $(hepmc_prefix)/include -L $(rivet_prefix)/lib -lRivet -L $(hepmc_prefix)/lib -lHepMC -Wl,-rpath -Wl,$(hepmc_prefix)/lib -lz
-c++ $(CXXFLAGS) -o HepMCReader HepMCReader.cc
+CXXFLAGS=-std=c++11 -I $rivet_prefix/include -I $hepmc_prefix/include -L $rivet_prefix/lib -lRivet -L $hepmc_prefix/lib -lHepMC -Wl,-rpath -Wl,$hepmc_prefix/lib -lz
+c++ $CXXFLAGS -o HepMCReader HepMCReader.cc
 cp HepMCReader /usr/local/bin
