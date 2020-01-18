@@ -26,3 +26,4 @@
 /lib64/libnl.so.1.1.4
 /lib64/libwrap.so.0
 /lib64/libwrap.so.0.7.6
+/lib64/libhwloc.so.5
