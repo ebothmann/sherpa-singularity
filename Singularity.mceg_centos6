@@ -58,9 +58,13 @@ to be used but only serves as a base image for all the Sherpa images.
     /install_OpenLoops "$openloops_version"
     rm /install_OpenLoops
 
-    echo Installing OpenLoops Drell-Yan process libraries
+    echo Installing OpenLoops process libraries
     cd "OpenLoops-$openloops_version"
-    ./openloops libinstall ppll ppllj pplljj pplljjj ppvv ppvv_ew ppvvj ppvvj_ew ppll_ew ppllj_ew pplljj_ew pphll pphll2 pphllj pphllj2
+    ./openloops libinstall \
+        ppll ppllj pplljj pplljjj ppll_ew ppllj_ew pplljj_ew \
+        ppvv ppvv_ew ppvvj ppvvj_ew \
+        pphll pphll2 pphllj pphllj2 \
+        ppjj_ew
 
     echo Installing prebuilt BlackHat binaries
     cd /
