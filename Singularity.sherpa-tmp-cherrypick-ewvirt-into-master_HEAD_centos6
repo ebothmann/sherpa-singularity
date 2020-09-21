@@ -39,7 +39,6 @@ including support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops and BlackHat.
     ./configure \
         --prefix=/usr/local \
         --enable-blackhat=/opt/blackhat-r3095 \
-        --enable-fastjet=/usr/local \
         --enable-gzip \
         --enable-hepmc2=/usr/local \
         --enable-lhapdf=/usr/local \
@@ -47,6 +46,7 @@ including support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops and BlackHat.
         --enable-openloops=/opt/OpenLoops-2.0.0 \
         --enable-rivet=/usr/local \
         --with-sqlite3=install \
+        --with-libzip=install \
         CXXFLAGS="-O3 --std=c++11"
     make -j
     make install
