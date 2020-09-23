@@ -35,6 +35,8 @@ including support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops and BlackHat.
     cd /scratch
     git clone --branch tmp-cherrypick-ewvirt-into-master https://gitlab.com/sherpa-team/sherpa.git
     cd sherpa
+    git fetch
+    git checkout d07049535d7c2292c7a91b637216cbaed0502ed0
     autoreconf -i
     ./configure \
         --prefix=/usr/local \
