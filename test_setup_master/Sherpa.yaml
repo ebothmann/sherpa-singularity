@@ -1,0 +1,44 @@
+BEAMS: 2212
+BEAM_ENERGIES: 7000
+
+MI_HANDLER: None
+FRAGMENTATION: None
+BEAM_REMNANTS: None
+
+EVENTS: 1k
+
+FINISH_INITIALIZATION: 0
+ERROR: 0.99
+
+PROCESSES:
+- 93 93 -> 93 93:
+    Order: {QCD: 2, EW: 0}
+
+SELECTORS:
+- [Mass, 11, -11, 66, 166]
+- FastjetFinder:
+    Algorithm: kt
+    N: 2
+    PTMin: 10.0
+    ETMin: 0.0
+    DR: 0.4
+    f: 0.75
+    EtaMax: None
+    YMax: None
+    Nb: -1
+    Nb2: -1
+- FastjetFinder:
+    Algorithm: kt
+    N: 1
+    PTMin: 15.0
+- FastjetVeto:
+    Algorithm: antikt
+    N: 1
+    PTMin: 60
+- FastjetSelector:
+    Expression: Mass(p[2]+p[3])>100
+    Algorithm: antikt
+    N: 2
+    PTMin: 40
+    ETMin: 0
+    DR: 0.5
