@@ -51,7 +51,7 @@ to be used but only serves as a base image for all the Sherpa images.
     /install_LHAPDF
     rm /install_LHAPDF
 
-    openloops_version=2.0.0
+    openloops_version=2.1.1
     mkdir -p /opt
     cd /opt
     chmod +x /install_OpenLoops
