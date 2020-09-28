@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+build_dir="$1"
+branch_name="$2"
+
+# set up build environment
+source /opt/rh/devtoolset-6/enable
+source /opt/rh/python27/enable
+source /enable_OpenMPI
+export PATH="/usr/local/bin:$PATH"  # such that the custom autoconf is found first
+
+echo Installing Sherpa
+mkdir -p "$build_dir"
+cd "$build_dir"
+git clone --depth=100 --branch "${branch_name}" https://gitlab.com/sherpa-team/sherpa.git
+cd sherpa
+autoreconf -i
+./configure \
+    --prefix=/usr/local \
+    --enable-analysis \
+    --enable-blackhat=/opt/blackhat-r3095 \
+    --enable-fastjet=/usr/local \
+    --enable-gzip \
+    --enable-hepmc2=/usr/local \
+    --enable-lhapdf=/usr/local \
+    --enable-mpi \
+    --enable-openloops=/opt/OpenLoops-2.1.1 \
+    --enable-rivet=/usr/local \
+    --with-libzip=install \
+    CXXFLAGS="-O3"
+make -j8
+make install

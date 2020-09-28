@@ -45,3 +45,35 @@ for custom download links for Rivet and its dependencies.
 install_*:: Helper files used to install stuff. These can also be used as
 stand-alone scripts to install this stuff in non-Singularity contexts. However,
 mileage might vary, since there might be missing dependencies.
+
+== Receptable image recipes in this repository
+
+Receptacles are containers that have no pre-installation of Sherpa, but that can be used in "writable" mode to install Sherpa aposteriori.
+The big advantage is that we do not need a recipe for each Sherpa version, and that it's easier and much less time-consuming to keep a Sherpa version updated that is under active development.
+Let's have a look at an example.
+
+1. Use the sherpa-3.x receptacle recipe to build an empty Receptaple container that is suitable for installing Sherpa using a recent master commit (i.e. Sherpa "3.x").
+
+   --------------------------------------
+   sudo singularity build --writable Receptacle.sherpa-3.x_centos6{.img,}
+   --------------------------------------
+
+2. Now use the initialise_receptable script to git-clone, autoconf, make and make-install a given Sherpa branch into the Receptacle container:
+
+   --------------------------------------
+   ./initialise_receptable Receptacle.sherpa-3.x_centos6.img tmp-cherrypick-ewvirt-into-master
+   --------------------------------------
+
+3. The source and build directory of the last step will be called `Receptacle.sherpa-3.x_centos6.img-tmp-cherrypick-ewvirt-into-master/sherpa`. We can do manual modifications or use git to do pulls or checkouts.
+   Then we can use the make_within_receptable script to update the installation within the Receptacle container:
+
+   --------------------------------------
+   ./make_within_receptable Receptacle.sherpa-3.x_centos6.img tmp-cherrypick-ewvirt-into-master -j
+   ./make_within_receptable Receptacle.sherpa-3.x_centos6.img tmp-cherrypick-ewvirt-into-master install
+   --------------------------------------
+
+4. Whenever we are happy with our writable Receptacle container, we can transform it into a read-only production container (and e.g. copy it to our cluster):
+
+   --------------------------------------
+   sudo singularity build Receptacle.sherpa-3.x_centos6{.simg,.img}
+   --------------------------------------

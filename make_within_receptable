@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+recipe_file="$1"
+branch_name="$2"
+shift 2
+targets="$@"
+
+build_dir="/home/${recipe_file}-${branch_name}"
+
+sudo singularity exec --bind "$PWD":"/home" --writable "$recipe_file" make -C "$build_dir/sherpa" "${targets[@]}"

@@ -1,0 +1,29 @@
+Bootstrap: shub
+From: ebothmann/sherpa-singularity:mceg_centos6
+
+
+%help
+A Singularity file to define an image which can be used in writable sandbox
+mode to make or update a Sherpa installation, using the initialise_receptable
+script. The image has support for FastJet, HepMC2, LHAPDF, Rivet, OpenLoops
+and BlackHat.
+
+
+%labels
+    Maintainer Enrico Bothmann
+    Version v0.1
+
+
+%runscript
+    Sherpa "$@"
+
+
+%files
+    enable_OpenMPI
+
+
+%post
+    echo Installing yum dependencies ...
+    yum install -y libtool
+    ldconfig
+    yum clean all
