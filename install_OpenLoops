@@ -8,3 +8,11 @@ echo Installing OpenLoops
 wget https://openloops.hepforge.org/downloads?f=OpenLoops-$version.tar.gz -O- | tar xz
 cd OpenLoops-$version/
 ./scons
+
+patch -p1 lib_src/openloops/src/kinematics.F90 - <<<"1121c1121
+<   P_in(:,n_scatt+1:)  = - scalefactor * P_ex(:,n_scatt+1:)
+---
+>   P_in(:,n_scatt+1:n)  = - scalefactor * P_ex(:,n_scatt+1:n)
+"
+
+./scons
